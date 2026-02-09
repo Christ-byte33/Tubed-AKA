@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chris Store - Produk Terbaik & Harga Bersahabat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #6b48ff, #00d4ff);
+      color: white;
+      text-align: center;
+      padding: 2.2rem 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.15rem;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+
+    .card-content {
+      padding: 1.3rem;
+    }
+
+    .card h3 {
+      font-size: 1.28rem;
+      margin-bottom: 0.7rem;
+      color: #222;
+    }
+
+    .price {
+      font-size: 1.45rem;
+      font-weight: bold;
+      color: #e91e63;
+      margin-bottom: 0.9rem;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 1.05rem;
+      margin-left: 0.9rem;
+    }
+
+    .btn-whatsapp {
+      display: block;
+      background: #25D366;
+      color: white;
+      text-align: center;
+      padding: 0.95rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .btn-whatsapp:hover {
+      background: #20b858;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.2rem 1rem;
+      background: #222;
+      color: #aaa;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 500px) {
+      header h1 { font-size: 2.1rem; }
+      .products { gap: 1.2rem; }
+      .card img { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Chris Store</h1>
+    <p>Produk Berkualitas • Pengiriman Cepat • Harga Terjangkau</p>
+  </header>
+
+  <div class="container">
+
+    <div class="products">
+
+      <!-- Produk 1 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Jam Tangan">
+        <div class="card-content">
+          <h3>Jam Tangan Sporty Premium</h3>
+          <div>
+            <span class="price">Rp 285.000</span>
+            <span class="old-price">Rp 450.000</span>
+          </div>
+          <a href="https://wa.me/6281247659075?text=Halo%20Chris%20Store%2C%20saya%20mau%20order%20Jam%20Tangan%20Sporty%20Premium" 
+             class="btn-whatsapp" target="_blank">
+             Pesan via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Produk 2 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Sneakers">
+        <div class="card-content">
+          <h3>Sneakers Casual Pria & Wanita</h3>
+          <div>
+            <span class="price">Rp 395.000</span>
+          </div>
+          <a href="https://wa.me/6281247659075?text=Halo%20Chris%20Store%2C%20saya%20mau%20order%20Sneakers%20Casual" 
+             class="btn-whatsapp" target="_blank">
+             Pesan via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Produk 3 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80" alt="Sepatu Lari">
+        <div class="card-content">
+          <h3>Sepatu Lari Ultra Light</h3>
+          <div>
+            <span class="price">Rp 520.000</span>
+            <span class="old-price">Rp 780.000</span>
+          </div>
+          <a href="https://wa.me/6281247659075?text=Halo%20Chris%20Store%2C%20saya%20mau%20order%20Sepatu%20Lari%20Ultra%20Light" 
+             class="btn-whatsapp" target="_blank">
+             Pesan via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Tambahkan produk baru di sini dengan format yang sama -->
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Chris Store • Kontak: 0812-4765-9075</p>
+  </footer>
+
+</body>
+</html>
