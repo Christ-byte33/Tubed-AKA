@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astra Motor – Cabang Passo Ambon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #E2001A;
+      --red-dark: #b0001a;
+      --black: #0d0d0d;
+      --dark: #1a1a1a;
+      --gray: #2e2e2e;
+      --mid: #555;
+      --light: #f5f5f5;
+      --white: #ffffff;
+      --gold: #c9a227;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ───────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      height: 70px;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--red);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    /* SVG Astra Motor logo drawn inline */
+    .logo-svg {
+      width: 54px; height: 54px;
+      filter: drop-shadow(0 0 6px rgba(226,0,26,0.6));
+    }
+
+    .nav-brand {
+      line-height: 1.1;
+    }
+    .nav-brand .main { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; letter-spacing: 2px; color: var(--white); }
+    .nav-brand .sub  { font-size: 11px; font-weight: 400; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      color: var(--white); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      position: relative; padding-bottom: 4px;
+      transition: color .25s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px; background: var(--red);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--red); color: var(--white);
+      padding: 10px 24px; border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 14px; letter-spacing: 2px;
+      text-transform: uppercase; text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background .25s, transform .2s;
+    }
+    .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    /* ── HERO ─────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 100px 40px 60px;
+      background: var(--black);
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    /* diagonal red stripe */
+    .hero-bg::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 55%; height: 100%;
+      background: linear-gradient(135deg, transparent 30%, var(--red) 30%, var(--red-dark) 100%);
+      clip-path: polygon(18% 0, 100% 0, 100% 100%, 0% 100%);
+      opacity: .12;
+    }
+    /* noise grain overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: .4;
+    }
+
+    /* big decorative ring */
+    .hero-ring {
+      position: absolute; right: -80px; top: 50%; transform: translateY(-50%);
+      width: 640px; height: 640px; border-radius: 50%;
+      border: 60px solid var(--red);
+      opacity: .06; z-index: 0;
+    }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 680px;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(226,0,26,.15); border: 1px solid var(--red);
+      padding: 6px 16px; border-radius: 2px;
+      font-size: 12px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 28px;
+      animation: fadeUp .7s ease both;
+    }
+    .hero-badge span { width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(52px, 8vw, 100px);
+      font-weight: 900; line-height: .95;
+      text-transform: uppercase;
+      animation: fadeUp .7s .15s ease both;
+    }
+    .hero-title em { color: var(--red); font-style: normal; }
+
+    .hero-sub {
+      font-size: 17px; font-weight: 300; color: #aaa;
+      margin: 24px 0 40px; line-height: 1.7; max-width: 480px;
+      animation: fadeUp .7s .3s ease both;
+    }
+
+    .hero-btns {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp .7s .45s ease both;
+    }
+    .btn-primary {
+      background: var(--red); color: var(--white);
+      padding: 15px 36px; border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 16px; letter-spacing: 2px;
+      text-transform: uppercase; text-decoration: none;
+      transition: background .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(226,0,26,.35);
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(226,0,26,.5); }
+
+    .btn-ghost {
+      border: 1.5px solid rgba(255,255,255,.3); color: var(--white);
+      padding: 15px 36px; border-radius: 2px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 16px; letter-spacing: 2px;
+      text-transform: uppercase; text-decoration: none;
+      transition: border-color .25s, transform .2s;
+    }
+    .btn-ghost:hover { border-color: var(--white); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex; gap: 48px; margin-top: 64px;
+      animation: fadeUp .7s .6s ease both;
+    }
+    .stat .num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 40px; font-weight: 900; color: var(--red);
+    }
+    .stat .lbl { font-size: 12px; color: #777; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+
+    /* motor silhouette placeholder */
+    .hero-motor {
+      position: absolute; right: 0; bottom: 0; top: 70px;
+      width: 55%; z-index: 1;
+      display: flex; align-items: flex-end; justify-content: center;
+      animation: slideIn 1s .2s ease both;
+      pointer-events: none;
+    }
+    .hero-motor svg { width: 100%; max-width: 700px; opacity: .85; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(60px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── SECTION COMMON ───────────────────────────── */
+    section { padding: 100px 40px; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px; font-weight: 600; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900; text-transform: uppercase; line-height: 1.05;
+    }
+    .section-title em { color: var(--red); font-style: normal; }
+
+    /* ── PRODUCTS ─────────────────────────────────── */
+    #produk { background: var(--dark); }
+    .products-header { text-align: center; margin-bottom: 60px; }
+    .products-header p { color: #888; margin-top: 14px; font-size: 16px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px; max-width: 1200px; margin: 0 auto;
+    }
+
+    .card {
+      background: var(--gray);
+      border-radius: 4px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.06);
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      cursor: pointer;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.5); border-color: var(--red); }
+
+    .card-img {
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .card-img svg { width: 80%; transition: transform .4s; }
+    .card:hover .card-img svg { transform: scale(1.06); }
+
+    /* per-model color accents */
+    .card-img.vario  { background: linear-gradient(135deg, #1a1a1a, #2a1010); }
+    .card-img.beat   { background: linear-gradient(135deg, #1a1a1a, #101a20); }
+    .card-img.supra  { background: linear-gradient(135deg, #1a1a1a, #1a1510); }
+    .card-img.cb150  { background: linear-gradient(135deg, #1a1a1a, #0d0d1a); }
+    .card-img.pcx    { background: linear-gradient(135deg, #1a1a1a, #101a10); }
+    .card-img.revo   { background: linear-gradient(135deg, #1a1a1a, #1a0d0d); }
+
+    .card-body { padding: 20px 22px; }
+    .card-series { font-size: 11px; color: var(--red); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+    .card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 900; margin: 4px 0 8px; }
+    .card-desc { font-size: 13px; color: #888; line-height: 1.6; }
+    .card-price { margin-top: 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--gold); }
+    .card-price span { font-size: 12px; color: #666; font-family: 'Barlow', sans-serif; font-weight: 400; }
+
+    .card-cta {
+      display: block; width: 100%; margin-top: 16px;
+      padding: 11px; background: transparent;
+      border: 1.5px solid var(--red); color: var(--red);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 14px; letter-spacing: 2px;
+      text-transform: uppercase; cursor: pointer;
+      border-radius: 2px; transition: background .25s, color .25s;
+    }
+    .card-cta:hover { background: var(--red); color: var(--white); }
+
+    /* ── LAYANAN ──────────────────────────────────── */
+    #layanan { background: var(--black); }
+    .layanan-inner { max-width: 1200px; margin: 0 auto; }
+    .layanan-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; margin-top: 60px; align-items: start;
+    }
+    .layanan-list { display: flex; flex-direction: column; gap: 16px; }
+    .layanan-item {
+      display: flex; align-items: flex-start; gap: 20px;
+      background: var(--dark); padding: 24px 28px;
+      border-radius: 4px; border-left: 3px solid var(--red);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .layanan-item:hover { transform: translateX(6px); box-shadow: -4px 0 24px rgba(226,0,26,.2); }
+    .layanan-icon {
+      width: 42px; height: 42px; min-width: 42px;
+      background: rgba(226,0,26,.12); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .layanan-icon svg { width: 20px; height: 20px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .layanan-info h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .layanan-info p { font-size: 13px; color: #888; line-height: 1.6; }
+
+    .layanan-visual {
+      position: sticky; top: 100px;
+      background: var(--dark); border-radius: 4px;
+      padding: 40px; border: 1px solid rgba(255,255,255,.06);
+    }
+    .layanan-visual h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; margin-bottom: 20px; }
+    .jam-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07); font-size: 14px; }
+    .jam-item:last-child { border-bottom: none; }
+    .jam-item .hari { color: #bbb; }
+    .jam-item .waktu { color: var(--gold); font-weight: 600; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; }
+    .jam-item .waktu.tutup { color: var(--red); }
+
+    .map-box {
+      margin-top: 28px; border-radius: 4px; overflow: hidden;
+      background: #111; height: 180px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .map-box svg { width: 36px; height: 36px; stroke: var(--red); fill: none; stroke-width: 1.5; }
+    .map-box p { font-size: 13px; color: #777; text-align: center; line-height: 1.6; }
+    .map-link {
+      color: var(--red); text-decoration: none; font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase;
+      border-bottom: 1.5px solid var(--red); padding-bottom: 2px;
+      transition: color .25s;
+    }
+    .map-link:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── PROMO ────────────────────────────────────── */
+    #promo {
+      background: var(--dark);
+      position: relative; overflow: hidden;
+    }
+    #promo::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(226,0,26,.12) 0%, transparent 65%);
+    }
+    .promo-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .promo-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px; margin-top: 60px;
+    }
+    .promo-card {
+      background: var(--gray); border-radius: 4px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .promo-banner {
+      height: 8px;
+    }
+    .promo-banner.hot { background: var(--red); }
+    .promo-banner.gold-b { background: linear-gradient(90deg, var(--gold), #a07800); }
+    .promo-banner.blue-b { background: linear-gradient(90deg, #0060c8, #004090); }
+
+    .promo-body { padding: 28px; }
+    .promo-tag {
+      display: inline-block;
+      padding: 4px 12px; border-radius: 2px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .promo-tag.hot { background: rgba(226,0,26,.15); color: var(--red); }
+    .promo-tag.gold-t { background: rgba(201,162,39,.15); color: var(--gold); }
+    .promo-tag.blue-t { background: rgba(0,96,200,.2); color: #4aa0ff; }
+
+    .promo-title { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+    .promo-desc { font-size: 13px; color: #888; line-height: 1.7; }
+    .promo-validity { margin-top: 18px; font-size: 12px; color: #666; }
+    .promo-validity strong { color: #aaa; }
+
+    /* ── KONTAK ───────────────────────────────────── */
+    #kontak { background: var(--black); }
+    .kontak-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; margin-top: 60px;
+    }
+    .kontak-info h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; margin-bottom: 24px; }
+    .kontak-row { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+    .kontak-row svg { width: 20px; height: 20px; min-width: 20px; stroke: var(--red); fill: none; stroke-width: 2; stroke-linecap: round; margin-top: 2px; }
+    .kontak-row div .lbl { font-size: 11px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+    .kontak-row div .val { font-size: 15px; color: #ddd; line-height: 1.6; }
+
+    .kontak-form h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; margin-bottom: 24px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 12px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; background: var(--dark);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 2px; padding: 12px 16px;
+      color: var(--white); font-family: 'Barlow', sans-serif; font-size: 14px;
+      transition: border-color .25s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--red); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select option { background: var(--dark); }
+
+    .btn-submit {
+      width: 100%; padding: 14px;
+      background: var(--red); color: var(--white);
+      border: none; border-radius: 2px; cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 16px; letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background .25s, transform .2s;
+      box-shadow: 0 4px 20px rgba(226,0,26,.3);
+    }
+    .btn-submit:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      background: #080808;
+      border-top: 2px solid var(--red);
+      padding: 50px 40px 30px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-brand .nav-brand .main { font-size: 20px; }
+    .footer-brand p { font-size: 13px; color: #666; margin-top: 12px; line-height: 1.7; max-width: 260px; }
+    .footer-col h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: #888; text-decoration: none; font-size: 13px; transition: color .25s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .socials { display: flex; gap: 12px; margin-top: 20px; }
+    .social-btn {
+      width: 38px; height: 38px;
+      background: var(--dark); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .25s, border-color .25s;
+      text-decoration: none;
+    }
+    .social-btn:hover { background: var(--red); border-color: var(--red); }
+    .social-btn svg { width: 16px; height: 16px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .footer-bottom {
+      max-width: 1200px; margin: 40px auto 0;
+      padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: #555;
+    }
+
+    /* ── WHATSAPP FLOAT ───────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      background: #25d366; width: 54px; height: 54px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5);
+      cursor: pointer; text-decoration: none;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,.6); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ── DIVIDER ──────────────────────────────────── */
+    .red-divider { width: 48px; height: 3px; background: var(--red); margin: 16px 0 0; }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 70px 20px; }
+      #hero { padding: 100px 20px 60px; }
+      .hero-motor { display: none; }
+      .layanan-grid,
+      .kontak-inner { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: 48px; }
+      .hero-stats { gap: 28px; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <!-- Astra Motor Logo SVG -->
+    <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="#E2001A"/>
+      <circle cx="50" cy="50" r="43" fill="none" stroke="white" stroke-width="1.5"/>
+      <!-- A letter -->
+      <polygon points="50,18 28,75 36,75 50,38 64,75 72,75" fill="white"/>
+      <rect x="33" y="58" width="34" height="6" fill="white"/>
+      <!-- Honda H mark area bottom -->
+      <text x="50" y="92" font-family="Arial" font-size="7" fill="white" text-anchor="middle" font-weight="bold" letter-spacing="1">MOTOR</text>
+    </svg>
+    <div class="nav-brand">
+      <div class="main">ASTRA MOTOR</div>
+      <div class="sub">Cabang Passo · Ambon</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#produk">Produk</a></li>
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#promo">Promo</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+  <a href="#kontak" class="nav-cta">Test Ride</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Dealer Resmi Honda – Passo, Ambon</div>
+    <h1 class="hero-title">Temukan<br/><em>Motor</em><br/>Terbaikmu</h1>
+    <p class="hero-sub">Astra Motor Cabang Passo menghadirkan unit Honda terlengkap, layanan servis profesional, dan kemudahan kredit untuk warga Ambon & Maluku.</p>
+    <div class="hero-btns">
+      <a href="#produk" class="btn-primary">Lihat Koleksi</a>
+      <a href="#promo" class="btn-ghost">Cek Promo</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">500+</div><div class="lbl">Unit Terjual</div></div>
+      <div class="stat"><div class="num">15+</div><div class="lbl">Tahun Berdiri</div></div>
+      <div class="stat"><div class="num">10rb+</div><div class="lbl">Pelanggan</div></div>
+    </div>
+  </div>
+  <!-- Motor illustration (SVG) -->
+  <div class="hero-motor">
+    <svg viewBox="0 0 600 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Scooter silhouette -->
+      <ellipse cx="160" cy="270" rx="70" ry="35" fill="none" stroke="#E2001A" stroke-width="12"/>
+      <ellipse cx="160" cy="270" rx="38" ry="19" fill="#1a1a1a" stroke="#444" stroke-width="3"/>
+      <ellipse cx="440" cy="270" rx="70" ry="35" fill="none" stroke="#E2001A" stroke-width="12"/>
+      <ellipse cx="440" cy="270" rx="38" ry="19" fill="#1a1a1a" stroke="#444" stroke-width="3"/>
+      <!-- body -->
+      <path d="M170 235 C170 235 200 200 260 195 L380 190 C420 190 470 210 470 240 L440 240 L170 240 Z" fill="#2a2a2a" stroke="#555" stroke-width="2"/>
+      <!-- seat -->
+      <path d="M240 192 C240 192 290 170 360 172 L380 190 L260 195 Z" fill="#1a1a1a" stroke="#666" stroke-width="1.5"/>
+      <!-- windshield -->
+      <path d="M360 175 L380 135 L400 130 L395 175 Z" fill="rgba(100,160,255,0.18)" stroke="#666" stroke-width="1.5"/>
+      <!-- front fork -->
+      <line x1="390" y1="230" x2="430" y2="260" stroke="#888" stroke-width="7" stroke-linecap="round"/>
+      <line x1="410" y1="220" x2="450" y2="255" stroke="#888" stroke-width="7" stroke-linecap="round"/>
+      <!-- handlebar -->
+      <line x1="385" y1="175" x2="415" y2="175" stroke="#bbb" stroke-width="6" stroke-linecap="round"/>
+      <!-- exhaust -->
+      <path d="M175 238 C150 242 130 248 115 255" stroke="#888" stroke-width="5" stroke-linecap="round"/>
+      <!-- Astra sticker on body -->
+      <text x="285" y="222" font-family="Arial" font-size="14" fill="#E2001A" font-weight="bold" letter-spacing="2">ASTRA</text>
+    </svg>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section id="produk">
+  <div class="products-header">
+    <div class="section-label">Koleksi Kami</div>
+    <h2 class="section-title">Motor <em>Honda</em> Pilihan</h2>
+    <div class="red-divider" style="margin: 16px auto 0;"></div>
+    <p>Unit terlengkap dan terbaru, tersedia ready stock di showroom kami.</p>
+  </div>
+  <div class="products-grid">
+
+    <div class="card">
+      <div class="card-img vario">
+        <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="45" cy="95" rx="25" ry="14" fill="none" stroke="#E2001A" stroke-width="5"/>
+          <ellipse cx="155" cy="95" rx="25" ry="14" fill="none" stroke="#E2001A" stroke-width="5"/>
+          <path d="M55 80 C55 80 75 60 100 58 L135 57 C155 57 170 70 170 82 L155 82 L55 82 Z" fill="#3a0a0a" stroke="#E2001A" stroke-width="1.5"/>
+          <path d="M98 58 C98 58 115 44 132 45 L135 57 L100 58 Z" fill="#1a0505" stroke="#c00" stroke-width="1"/>
+          <line x1="136" y1="73" x2="155" y2="85" stroke="#aaa" stroke-width="3" stroke-linecap="round"/>
+          <text x="88" y="76" font-size="8" fill="#E2001A" font-family="Arial" font-weight="bold">VARIO</text>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-series">Matic Premium</div>
+        <div class="card-name">Honda Vario 160</div>
+        <div class="card-desc">Motor matic sporty dengan mesin 160cc ESP, fitur keyless, dan desain futuristik terkini.</div>
+        <div class="card-price">Rp 27.500.000 <span>/ OTR Ambon</span></div>
+        <button class="card-cta">Hubungi Kami</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img beat">
+        <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="45" cy="95" rx="25" ry="14" fill="none" stroke="#0080c8" stroke-width="5"/>
+          <ellipse cx="155" cy="95" rx="25" ry="14" fill="none" stroke="#0080c8" stroke-width="5"/>
+          <path d="M55 80 C55 80 72 62 98 60 L132 59 C152 59 168 72 168 82 L155 82 L55 82 Z" fill="#0a1020" stroke="#0080c8" stroke-width="1.5"/>
+          <path d="M96 60 C96 60 112 46 128 47 L132 59 L98 60 Z" fill="#050a10" stroke="#005090" stroke-width="1"/>
+          <line x1="133" y1="74" x2="152" y2="85" stroke="#aaa" stroke-width="3" stroke-linecap="round"/>
+          <text x="86" y="76" font-size="8" fill="#0080c8" font-family="Arial" font-weight="bold">BEAT</text>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-series">Matic Ekonomis</div>
+        <div class="card-name">Honda Beat 110</div>
+        <div class="card-desc">Matic paling populer di Indonesia. Irit, lincah, dan nyaman untuk aktivitas harian di Ambon.</div>
+        <div class="card-price">Rp 17.200.000 <span>/ OTR Ambon</span></div>
+        <button class="card-cta">Hubungi Kami</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img supra">
+        <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="40" cy="92" rx="24" ry="14" fill="none" stroke="#c9a227" stroke-width="5"/>
+          <ellipse cx="160" cy="92" rx="24" ry="14" fill="none" stroke="#c9a227" stroke-width="5"/>
+          <path d="M52 80 Q80 62 110 60 L145 60 Q168 62 172 78 L160 80 Z" fill="#100e00" stroke="#c9a227" stroke-width="1.5"/>
+          <path d="M108 60 L140 52 L145 60 Z" fill="#080700" stroke="#a07800" stroke-width="1"/>
+          <line x1="145" y1="72" x2="162" y2="84" stroke="#aaa" stroke-width="3" stroke-linecap="round"/>
+          <text x="83" y="75" font-size="8" fill="#c9a227" font-family="Arial" font-weight="bold">SUPRA</text>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-series">Bebek Sporty</div>
+        <div class="card-name">Honda Supra GTR</div>
+        <div class="card-desc">Motor bebek berperforma tinggi dengan desain sporty dan mesin bertenaga untuk jalanan kota.</div>
+        <div class="card-price">Rp 21.800.000 <span>/ OTR Ambon</span></div>
+        <button class="card-cta">Hubungi Kami</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img cb150">
+        <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="42" cy="93" rx="24" ry="14" fill="none" stroke="#6060ff" stroke-width="5"/>
+          <ellipse cx="158" cy="93" rx="24" ry="14" fill="none" stroke="#6060ff" stroke-width="5"/>
+          <path d="M55 80 Q80 55 110 52 L150 54 Q172 60 172 78 L158 80 Z" fill="#08081a" stroke="#6060ff" stroke-width="1.5"/>
+          <!-- naked bike style tank -->
+          <path d="M106 52 L138 38 L150 54 Z" fill="#050510" stroke="#4040bb" stroke-width="1"/>
+          <line x1="140" y1="65" x2="160" y2="80" stroke="#aaa" stroke-width="4" stroke-linecap="round"/>
+          <text x="84" y="72" font-size="7.5" fill="#8080ff" font-family="Arial" font-weight="bold">CB150R</text>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-series">Sport Naked</div>
+        <div class="card-name">Honda CB150R</div>
+        <div class="card-desc">Motor sport naked bergaya streetfire dengan mesin DOHC 150cc dan tampilan agresif nan stylish.</div>
+        <div class="card-price">Rp 32.900.000 <span>/ OTR Ambon</span></div>
+        <button class="card-cta">Hubungi Kami</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img pcx">
+        <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="45" cy="95" rx="26" ry="15" fill="none" stroke="#00b890" stroke-width="5"/>
+          <ellipse cx="155" cy="95" rx="26" ry="15" fill="none" stroke="#00b890" stroke-width="5"/>
+          <path d="M58 82 C58 82 78 58 105 55 L138 54 C160 54 172 68 172 82 L155 82 Z" fill="#051210" stroke="#00b890" stroke-width="1.5"/>
+          <path d="M103 55 C103 55 122 40 140 41 L138 54 L105 55 Z" fill="#030a08" stroke="#009070" stroke-width="1"/>
+          <line x1="139" y1="68" x2="157" y2="82" stroke="#aaa" stroke-width="3" stroke-linecap="round"/>
+          <text x="90" y="75" font-size="8" fill="#00b890" font-family="Arial" font-weight="bold">PCX 160</text>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-series">Premium Scooter</div>
+        <div class="card-name">Honda PCX 160</div>
+        <div class="card-desc">Skutik premium dengan fitur keyless, bagasi besar, dan teknologi Honda Smart Technology terkini.</div>
+        <div class="card-price">Rp 35.400.000 <span>/ OTR Ambon</span></div>
+        <button class="card-cta">Hubungi Kami</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img revo">
+        <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="42" cy="92" rx="24" ry="14" fill="none" stroke="#E2001A" stroke-width="5"/>
+          <ellipse cx="158" cy="92" rx="24" ry="14" fill="none" stroke="#888" stroke-width="5"/>
+          <path d="M54 80 Q78 63 106 61 L140 61 Q162 64 164 78 L158 80 Z" fill="#1a0808" stroke="#E2001A" stroke-width="1.5"/>
+          <path d="M104 61 L136 52 L140 61 Z" fill="#0d0505" stroke="#900" stroke-width="1"/>
+          <line x1="136" y1="72" x2="156" y2="82" stroke="#aaa" stroke-width="3" stroke-linecap="round"/>
+          <text x="83" y="75" font-size="8" fill="#E2001A" font-family="Arial" font-weight="bold">REVO X</text>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-series">Bebek Entry</div>
+        <div class="card-name">Honda Revo X</div>
+        <div class="card-desc">Motor bebek handal, irit bahan bakar, dan bertenaga. Pilihan tepat untuk mobilitas sehari-hari.</div>
+        <div class="card-price">Rp 16.500.000 <span>/ OTR Ambon</span></div>
+        <button class="card-cta">Hubungi Kami</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LAYANAN -->
+<section id="layanan">
+  <div class="layanan-inner">
+    <div class="section-label">Apa yang Kami Tawarkan</div>
+    <h2 class="section-title">Layanan <em>Terbaik</em></h2>
+    <div class="red-divider"></div>
+    <div class="layanan-grid">
+      <div class="layanan-list">
+
+        <div class="layanan-item">
+          <div class="layanan-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="layanan-info">
+            <h4>Penjualan Unit Baru</h4>
+            <p>Tersedia seluruh varian Honda terbaru dengan pilihan warna lengkap. Proses pembelian mudah dan cepat.</p>
+          </div>
+        </div>
+
+        <div class="layanan-item">
+          <div class="layanan-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <div class="layanan-info">
+            <h4>Servis Resmi Honda</h4>
+            <p>Teknisi bersertifikat AHM siap menangani servis berkala, tune-up, dan perbaikan motor Honda Anda.</p>
+          </div>
+        </div>
+
+        <div class="layanan-item">
+          <div class="layanan-icon">
+            <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <div class="layanan-info">
+            <h4>Kredit & Pembiayaan</h4>
+            <p>Kemudahan kredit melalui FIF, Adira, dan BCA Finance dengan DP ringan dan cicilan terjangkau.</p>
+          </div>
+        </div>
+
+        <div class="layanan-item">
+          <div class="layanan-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="layanan-info">
+            <h4>Suku Cadang Original</h4>
+            <p>Stok spare part Honda original (AHM Parts) lengkap untuk semua tipe, garansi keaslian terjamin.</p>
+          </div>
+        </div>
+
+        <div class="layanan-item">
+          <div class="layanan-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="layanan-info">
+            <h4>Test Ride</h4>
+            <p>Rasakan langsung sensasi berkendara motor Honda pilihan Anda sebelum memutuskan untuk membeli.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="layanan-visual">
+        <h3>Jam Operasional</h3>
+        <div class="jam-item"><span class="hari">Senin – Jumat</span><span class="waktu">08.00 – 17.00 WIT</span></div>
+        <div class="jam-item"><span class="hari">Sabtu</span><span class="waktu">08.00 – 15.00 WIT</span></div>
+        <div class="jam-item"><span class="hari">Minggu</span><span class="waktu tutup">Tutup</span></div>
+        <div class="jam-item"><span class="hari">Hari Libur Nasional</span><span class="waktu tutup">Tutup</span></div>
+        <div class="map-box">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p>Jl. Poros Passo No. 12,<br/>Passo, Baguala, Kota Ambon<br/>Maluku – 97234</p>
+          <a href="https://maps.google.com/?q=Passo+Ambon" target="_blank" class="map-link">Buka di Google Maps →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO -->
+<section id="promo">
+  <div class="promo-inner">
+    <div class="section-label">Penawaran Terkini</div>
+    <h2 class="section-title">Promo &amp; <em>Spesial</em></h2>
+    <div class="red-divider"></div>
+    <div class="promo-grid">
+
+      <div class="promo-card">
+        <div class="promo-banner hot"></div>
+        <div class="promo-body">
+          <span class="promo-tag hot">🔥 Hot Deal</span>
+          <div class="promo-title">DP Mulai Rp 1 Juta!</div>
+          <div class="promo-desc">Bawa pulang Honda Beat & Vario dengan uang muka ringan mulai Rp 1.000.000. Cicilan mulai Rp 750.000/bulan. Proses ACC 1 hari kerja.</div>
+          <div class="promo-validity">Berlaku hingga: <strong>31 Mei 2025</strong></div>
+        </div>
+      </div>
+
+      <div class="promo-card">
+        <div class="promo-banner gold-b"></div>
+        <div class="promo-body">
+          <span class="promo-tag gold-t">✨ Trade-In</span>
+          <div class="promo-title">Tukar Tambah + Bonus Aksesori</div>
+          <div class="promo-desc">Tukarkan motor lama Anda dan dapatkan bonus aksesori senilai Rp 500.000 untuk setiap pembelian unit baru. Harga motor lama dihargai terbaik.</div>
+          <div class="promo-validity">Berlaku hingga: <strong>30 April 2025</strong></div>
+        </div>
+      </div>
+
+      <div class="promo-card">
+        <div class="promo-banner blue-b"></div>
+        <div class="promo-body">
+          <span class="promo-tag blue-t">🛠️ Servis</span>
+          <div class="promo-title">Servis Gratis Ongkos Jasa</div>
+          <div class="promo-desc">Gratis biaya jasa servis berkala untuk motor Honda tahun 2022–2024. Cukup bayar spare part. Berlaku di bengkel resmi kami.</div>
+          <div class="promo-validity">Berlaku: <strong>Setiap Rabu &amp; Kamis</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="section-label">Hubungi Kami</div>
+  <h2 class="section-title">Kami Siap <em>Melayani</em></h2>
+  <div class="red-divider"></div>
+  <div class="kontak-inner">
+    <div class="kontak-info">
+      <h3>Astra Motor Passo</h3>
+      <div class="kontak-row">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div>
+          <div class="lbl">Alamat</div>
+          <div class="val">Jl. Poros Passo No. 12, Passo<br/>Baguala, Kota Ambon, Maluku 97234</div>
+        </div>
+      </div>
+      <div class="kontak-row">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div>
+          <div class="lbl">Telepon</div>
+          <div class="val">(0911) 341-2200</div>
+        </div>
+      </div>
+      <div class="kontak-row">
+        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+        <div>
+          <div class="lbl">WhatsApp</div>
+          <div class="val">+62 812-3456-7890</div>
+        </div>
+      </div>
+      <div class="kontak-row">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <div>
+          <div class="lbl">Email</div>
+          <div class="val">info@astramotor-passo.co.id</div>
+        </div>
+      </div>
+      <div class="kontak-row">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div>
+          <div class="lbl">Jam Buka</div>
+          <div class="val">Senin–Jumat: 08.00–17.00 WIT<br/>Sabtu: 08.00–15.00 WIT</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kontak-form">
+      <h3>Kirim Pesan</h3>
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" placeholder="Masukkan nama Anda" />
+      </div>
+      <div class="form-group">
+        <label>Nomor WhatsApp</label>
+        <input type="tel" placeholder="Contoh: 0812-XXXX-XXXX" />
+      </div>
+      <div class="form-group">
+        <label>Keperluan</label>
+        <select>
+          <option value="">-- Pilih Keperluan --</option>
+          <option>Informasi Harga Motor</option>
+          <option>Test Ride</option>
+          <option>Kredit & Pembiayaan</option>
+          <option>Booking Servis</option>
+          <option>Spare Part</option>
+          <option>Lainnya</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Pesan</label>
+        <textarea placeholder="Tulis pesan Anda di sini..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="handleSend()">Kirim Pesan →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" fill="#E2001A"/>
+          <circle cx="50" cy="50" r="43" fill="none" stroke="white" stroke-width="1.5"/>
+          <polygon points="50,18 28,75 36,75 50,38 64,75 72,75" fill="white"/>
+          <rect x="33" y="58" width="34" height="6" fill="white"/>
+          <text x="50" y="92" font-family="Arial" font-size="7" fill="white" text-anchor="middle" font-weight="bold" letter-spacing="1">MOTOR</text>
+        </svg>
+        <div class="nav-brand">
+          <div class="main">ASTRA MOTOR</div>
+          <div class="sub">Passo · Ambon</div>
+        </div>
+      </div>
+      <p>Dealer resmi Honda terpercaya di Ambon. Melayani penjualan, servis, dan kebutuhan motor Honda Anda dengan sepenuh hati.</p>
+      <div class="socials">
+        <a class="social-btn" href="#" title="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="social-btn" href="#" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a class="social-btn" href="https://wa.me/6281234567890" title="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Produk</h5>
+      <ul>
+        <li><a href="#produk">Honda Vario 160</a></li>
+        <li><a href="#produk">Honda Beat 110</a></li>
+        <li><a href="#produk">Honda PCX 160</a></li>
+        <li><a href="#produk">Honda CB150R</a></li>
+        <li><a href="#produk">Honda Supra GTR</a></li>
+        <li><a href="#produk">Honda Revo X</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Layanan</h5>
+      <ul>
+        <li><a href="#layanan">Penjualan Unit</a></li>
+        <li><a href="#layanan">Servis Resmi</a></li>
+        <li><a href="#layanan">Kredit Motor</a></li>
+        <li><a href="#layanan">Spare Part</a></li>
+        <li><a href="#layanan">Test Ride</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Informasi</h5>
+      <ul>
+        <li><a href="#promo">Promo Bulan Ini</a></li>
+        <li><a href="#kontak">Hubungi Kami</a></li>
+        <li><a href="#">Tentang Kami</a></li>
+        <li><a href="#">Karir</a></li>
+        <li><a href="#">Kebijakan Privasi</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Astra Motor Cabang Passo, Ambon. Dealer Resmi Honda.</span>
+    <span>Dibuat dengan ❤ untuk warga Ambon & Maluku</span>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a class="wa-float" href="https://wa.me/6281234567890?text=Halo%20Astra%20Motor%20Passo%2C%20saya%20ingin%20informasi%20motor%20Honda." target="_blank" title="Chat WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--red)' : '';
+    });
+  });
+
+  // Form handler
+  function handleSend() {
+    const name = document.querySelector('input[type=text]').value.trim();
+    const phone = document.querySelector('input[type=tel]').value.trim();
+    if (!name || !phone) { alert('Mohon isi nama dan nomor WhatsApp Anda.'); return; }
+    const msg = encodeURIComponent(`Halo Astra Motor Passo! Saya ${name} (${phone}) ingin bertanya lebih lanjut.`);
+    window.open('https://wa.me/6281234567890?text='+msg, '_blank');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .layanan-item, .promo-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
